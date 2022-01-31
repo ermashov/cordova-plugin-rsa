@@ -1,4 +1,4 @@
-package ru.cordova.rsa.plugins;
+package ru.rsa.plugins;
 
 import android.content.Context;
 import android.util.Base64;

@@ -22,11 +22,11 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="RSAPlugin" >
-                <param name="android-package" value="ru.cordova.rsa.plugins.RSAPlugin" />
+                <param name="android-package" value="ru.rsa.plugins.RSAPlugin" />
             </feature>
         </config-file>
 
-        <source-file src="src/android/RSAPlugin.java" target-dir="src/ru/cordova/rsa/plugins/" />
+        <source-file src="src/android/RSAPlugin.java" target-dir="src/ru/rsa/plugins/" />
 
 
     </platform>

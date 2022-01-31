@@ -1,4 +1,4 @@
-package ru.cordova.rsa.plugins;
+package ru.rsa.plugins;
 
 
 public class RSAPlugin extends CordovaPlugin {
