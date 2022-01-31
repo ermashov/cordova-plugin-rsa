@@ -27,7 +27,7 @@
         </config-file>
 
         <source-file src="src/android/RSAPlugin.java" target-dir="src/ru/rsa/plugins/" />
-
+        <source-file src="src/android/RSA.java" target-dir="src/ru/rsa/plugins/" />
 
     </platform>
 

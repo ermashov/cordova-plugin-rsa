@@ -1,17 +1,23 @@
 cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module) {
 
+
     var RSAPlugin = function() {};
 
 
-    RSAPlugin.prototype.getCertificates = function(params, success, fail) {
+    RSAPlugin.prototype.init = function(params, success, fail) {
+        cordova.exec(success, fail, 'RSAPlugin', 'init', [
+            params.alias,
+        ]);
+    };
+    RSAPlugin.prototype.getPublicKey = function(params, success, fail) {
         cordova.exec(success, fail, 'RSAPlugin', 'getPublicKey', [
-            params.slotId,
+            params.alias,
         ]);
     };
 
     RSAPlugin.prototype.cmsSign = function(params, success, fail) {
         cordova.exec(success, fail, 'RSAPlugin', 'cmsSign', [
-            params.ckaId,
+            params.alias,
             params.data,
         ]);
     };
@@ -23,7 +29,7 @@ cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module
     };
     RSAPlugin.prototype.cmsDecrypt = function(params, success, fail) {
         cordova.exec(success, fail, 'RSAPlugin', 'cmsDecrypt', [
-            params.ckaId,
+            params.alias,
             params.data,
         ]);
     };
@@ -38,6 +44,5 @@ cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module
     if (module.exports) {
         module.exports = RSAPlugin;
     }
-
 
 });
