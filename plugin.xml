@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-rutoken"
+        version="1.1.0">
+
+    <name>Rutoken cordova plugin</name>
+    <description></description>
+    <author>Alexey Ermashov</author>
+    <keywords>android, rutoken</keywords>
+    <license>MIT</license>
+
+    <js-module src="www/rutoken.js" name="Rutoken">
+        <clobbers target="Rutoken" />
+    </js-module>
+    <engines>
+        <engine name="cordova-android" version=">=3.0.0"/>
+        <engine name="cordova-ios" version=">=3.0.0"/>
+    </engines>
+
+    <platform name="android">
+        <source-file src="src/ru/eaasoft/plugins/RutokenPlugin.java" target-dir="src/ru/eaasoft/plugins/" />
+
+        <source-file src="src/ru/rutoken/bcprovider/digest/Digest.java" target-dir="src/ru/rutoken/bcprovider/digest/" />
+        <source-file src="src/ru/rutoken/bcprovider/digest/GostR3411_1994Digest.java" target-dir="src/ru/rutoken/bcprovider/digest/" />
+        <source-file src="src/ru/rutoken/bcprovider/digest/GostR3411_2012_256Digest.java" target-dir="src/ru/rutoken/bcprovider/digest/" />
+        <source-file src="src/ru/rutoken/bcprovider/digest/GostR3411_2012_512Digest.java" target-dir="src/ru/rutoken/bcprovider/digest/" />
+        <source-file src="src/ru/rutoken/bcprovider/digest/Pkcs11Digest.java" target-dir="src/ru/rutoken/bcprovider/digest/" />
+        <source-file src="src/ru/rutoken/bcprovider/digest/RSADigest.java" target-dir="src/ru/rutoken/bcprovider/digest/" />
+        <source-file src="src/ru/rutoken/bcprovider/CmsSigner.java" target-dir="src/ru/rutoken/bcprovider/" />
+        <source-file src="src/ru/rutoken/bcprovider/DigestProvider.java" target-dir="src/ru/rutoken/bcprovider/" />
+        <source-file src="src/ru/rutoken/bcprovider/GostContentSigner.java" target-dir="src/ru/rutoken/bcprovider/" />
+        <source-file src="src/ru/rutoken/bcprovider/GostDigestCalculator.java" target-dir="src/ru/rutoken/bcprovider/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/CertNotFoundException.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/CertParsingException.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/GeneralErrorException.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/KeyNotFoundException.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/KeyTypeNotSupported.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/ObjectNotFoundException.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/Pkcs11CallerException.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/exception/Pkcs11Exception.java" target-dir="src/ru/rutoken/pkcs11caller/exception/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/signature/AbstractSignature.java" target-dir="src/ru/rutoken/pkcs11caller/signature/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/signature/GostR3410_2001Signature.java" target-dir="src/ru/rutoken/pkcs11caller/signature/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/signature/GostR3410_2012_256Signature.java" target-dir="src/ru/rutoken/pkcs11caller/signature/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/signature/GostR3410_2012_512Signature.java" target-dir="src/ru/rutoken/pkcs11caller/signature/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/signature/RSASignature.java" target-dir="src/ru/rutoken/pkcs11caller/signature/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/signature/Signature.java" target-dir="src/ru/rutoken/pkcs11caller/signature/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/Certificate.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/CertificateAndGostKeyPair.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/CertificateAndKeyPair.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/GostKeyPair.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/KeyPair.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/GostOids.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/Pkcs11Result.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/RsaKeyTransEnvelopedRecipient.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/RtPkcs11Library.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/SlotEventThread.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/Token.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/TokenManager.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/TokenManagerEvent.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/pkcs11caller/Utils.java" target-dir="src/ru/rutoken/pkcs11caller/" />
+        <source-file src="src/ru/rutoken/utils/KeyExecutors.java" target-dir="src/ru/rutoken/utils/" />
+        <source-file src="src/ru/rutoken/utils/Pkcs11ErrorTranslator.java" target-dir="src/ru/rutoken/utils/" />
+
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="RutokenPlugin" >
+                <param name="android-package" value="ru.eaasoft.plugins.RutokenPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <framework src="src/android/rutoken.gradle" custom="true" type="gradleReference" />
+
+        <source-file src="src/android/libs/pkcs11jna-1.1.4.jar" target-dir="libs" framework="true"/>
+        <source-file src="src/android/libs/rtserviceconnection-1.0.2.aar" target-dir="libs" framework="true"/>
+
+        <resource-file src="src/android/jniLibs/armeabi-v7a/librtpcsc.so" target="jniLibs/armeabi-v7a/librtpcsc.so"/>
+        <resource-file src="src/android/jniLibs/armeabi-v7a/librtpkcs11ecp.so" target="jniLibs/armeabi-v7a/librtpkcs11ecp.so"/>
+
+        <resource-file src="src/android/jniLibs/arm64-v8a/librtpcsc.so" target="jniLibs/arm64-v8a/librtpcsc.so"/>
+        <resource-file src="src/android/jniLibs/arm64-v8a/librtpkcs11ecp.so" target="jniLibs/arm64-v8a/librtpkcs11ecp.so"/>
+
+    </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="RutokenPlugin">
+                <param name="ios-package" value="RutokenPlugin"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <!--Modifiing target app Info.plist file-->
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>external-accessory</string>
+            </array>
+        </config-file>
+        <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
+            <array>
+                <string>com.aktivco.rutokenecp</string>
+            </array>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSBluetoothAlwaysUsageDescription">
+            <string>Bluetooth будет использован для работы с устройствами Рутокен</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
+            <string>Bluetooth будет использован для работы с устройствами Рутокен</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="ITSAppUsesNonExemptEncryption">
+            <false/>
+        </config-file>
+        
+        <!--Module entry point-->
+        <source-file src="src/ios/RutokenPlugin.swift"/>
+
+        <!--Swift bridging header-->
+        <header-file src="src/ios/RutokenPlugin-Bridging-Header.h"/>
+
+        <!--extending of libp11-->
+        <header-file src="src/ios/libp11+ext/libp11+ext.h"/>
+        <source-file src="src/ios/libp11+ext/libp11+ext.c"/>
+
+        <!--libp11-->
+        <header-file src="src/ios/libp11/config.h"/>
+        <header-file src="src/ios/libp11/eng_err.h"/>
+        <header-file src="src/ios/libp11/engine.h"/>
+        <header-file src="src/ios/libp11/libp11-int.h"/>
+        <header-file src="src/ios/libp11/libp11.h"/>
+        <header-file src="src/ios/libp11/p11_err.h"/>
+        <header-file src="src/ios/libp11/pkcs11.h"/>
+        <source-file src="src/ios/libp11/eng_back.c"/>
+        <source-file src="src/ios/libp11/eng_err.c"/>
+        <source-file src="src/ios/libp11/eng_front.c"/>
+        <source-file src="src/ios/libp11/eng_parse.c"/>
+        <source-file src="src/ios/libp11/libpkcs11.c"/>
+        <source-file src="src/ios/libp11/p11_atfork.c"/>
+        <source-file src="src/ios/libp11/p11_attr.c"/>
+        <source-file src="src/ios/libp11/p11_cert.c"/>
+        <source-file src="src/ios/libp11/p11_ckr.c"/>
+        <source-file src="src/ios/libp11/p11_ec.c"/>
+        <source-file src="src/ios/libp11/p11_err.c"/>
+        <source-file src="src/ios/libp11/p11_front.c"/>
+        <source-file src="src/ios/libp11/p11_key.c"/>
+        <source-file src="src/ios/libp11/p11_load.c"/>
+        <source-file src="src/ios/libp11/p11_misc.c"/>
+        <source-file src="src/ios/libp11/p11_pkey.c"/>
+        <source-file src="src/ios/libp11/p11_rsa.c"/>
+        <source-file src="src/ios/libp11/p11_slot.c"/>
+
+        <!--Common swift code-->
+        <source-file src="src/ios/PKCS11/PKCS11Error.swift"/>
+        <source-file src="src/ios/PKCS11/PKCS11Wrapper.swift"/>
+        <source-file src="src/ios/PKCS11/CMSData.swift"/>
+        <source-file src="src/ios/PKCS11/SlotDto.swift"/>
+        <source-file src="src/ios/PKCS11/TokenDto.swift"/>
+        <source-file src="src/ios/PKCS11/CertificateDto.swift"/>
+        <source-file src="src/ios/PKCS11/String+Helpers.swift"/>
+        <source-file src="src/ios/PKCS11/Data+Hex.swift"/>
+
+        <!--Rutoken frameworks should be embedded and linked (written twice as source-file and framework)-->
+        <source-file src="src/ios/Frameworks/openssl.framework" target-dir="libs" framework="true"/>
+        <source-file src="src/ios/Frameworks/RtPcsc.framework" target-dir="libs" framework="true"/>
+        <source-file src="src/ios/Frameworks/rtpkcs11ecp.framework" target-dir="libs" framework="true"/>
+
+        <!--Frameworks-->
+        <framework src="src/ios/Frameworks/openssl.framework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/RtPcsc.framework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/rtpkcs11ecp.framework" custom="true" embed="true"/>
+
+        <!--Dependencies-->
+        <dependency id="cordova-plugin-add-swift-support" version="^2.0.2"/>
+    </platform>
+</plugin>
