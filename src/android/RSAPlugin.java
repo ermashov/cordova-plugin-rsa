@@ -80,7 +80,7 @@ public class RSAPlugin extends CordovaPlugin {
 
             return true;
 
-        }else if (action.equals("getPublicKey"))
+        }else if (action.equals("getCertificate"))
         {
 
             cordova.getThreadPool().execute(new Runnable() {
@@ -90,9 +90,9 @@ public class RSAPlugin extends CordovaPlugin {
 
                         String alias = args.getString(0);
 
-                        String publicKey = RSA.getPublicKey(alias);
+                        String certificate = RSA.getCertificate(alias);
 
-                        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, publicKey);
+                        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, certificate);
                         callbackContext.sendPluginResult(pluginResult);
 
                     } catch (Exception e) {
@@ -116,39 +116,7 @@ public class RSAPlugin extends CordovaPlugin {
                         String alias = args.getString(0);
                         String pData = args.getString(1);
 
-                        Log.v("RSAPlugin", "cmsSign 1");
-
                         String cmsSing = RSA.cmsSing(alias, pData);
-
-                        Log.v("RSAPlugin", "cmsSign end");
-
-                        /*
-                        CertificateAndGostKeyPair cert = null;
-                        for (Map.Entry<String, CertificateAndGostKeyPair> entry: mCertificateGostMap.entrySet()){
-                            //Log.v("ckaId item", new String(entry.getValue().getCertificate().getCkaId()));
-                            if(new String(entry.getValue().getCertificate().getCkaId()).equals(ckaId)){
-                                cert = entry.getValue();
-                            }
-                        }
-
-                        if(cert == null)
-                            callbackContext.error("Certificate not found");
-
-                        long hPrivateKey =  cert.getGostKeyPair().getPrivKeyHandle();
-                        byte[] data = pData.getBytes();
-                        DigestCalculatorProvider dg = new SimpleDigestCalculatorProvider(new SHA256DigestCalculator());
-                        RsaContentSigner mRsaContentSigner = new RsaContentSigner(Pkcs11RsaSigner.SignAlgorithm.RSASHA256, session.longValue(), hPrivateKey);
-
-
-                        CMSSignedDataGenerator generator = new CMSSignedDataGenerator();
-                        generator.addCertificate(cert.getCertificate().getCertificateHolder());
-                        generator.addSignerInfoGenerator(
-                                new SignerInfoGeneratorBuilder(dg)
-                                        .build(mRsaContentSigner, cert.getCertificate().getCertificateHolder())
-                        );
-                        CMSTypedData cmsData = new CMSProcessableByteArray(data);
-                        CMSSignedData attachedCmsSignature = generator.generate(cmsData, true);
-                        */
 
                         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, cmsSing);
                         callbackContext.sendPluginResult(pluginResult);

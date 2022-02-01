@@ -9,8 +9,8 @@ cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module
             params.alias,
         ]);
     };
-    RSAPlugin.prototype.getPublicKey = function(params, success, fail) {
-        cordova.exec(success, fail, 'RSAPlugin', 'getPublicKey', [
+    RSAPlugin.prototype.getCertificate = function(params, success, fail) {
+        cordova.exec(success, fail, 'RSAPlugin', 'getCertificate', [
             params.alias,
         ]);
     };

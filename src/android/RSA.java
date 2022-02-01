@@ -120,7 +120,7 @@ public class RSA {
         return key;
     }
 
-    public static String getPublicKey(String alias) throws Exception{
+    public static String getCertificate(String alias) throws Exception{
         KeyStore keyStore = KeyStore.getInstance(KEYSTORE_PROVIDER);
         keyStore.load(null, null);
         Certificate cert = keyStore.getCertificate(alias);
