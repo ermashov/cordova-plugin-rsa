@@ -127,7 +127,7 @@ public class RSA {
         return Base64.encodeToString(cert.getEncoded(), Base64.NO_WRAP);
     }
 
-    public static PrivateKey getPrivateKey(String alias) throws Exception{
+    private static PrivateKey getPrivateKey(String alias) throws Exception{
         KeyStore keyStore = KeyStore.getInstance(KEYSTORE_PROVIDER);
         keyStore.load(null, null);
 
