@@ -66,8 +66,10 @@ public class RSAPlugin extends CordovaPlugin {
                         if (!RSA.isEntryAvailable(alias)) {
                             RSA.createKeyPair(cordova.getActivity().getApplicationContext(), alias);
                         }
-                        Log.v("New privete key", RSA.getPublicKey(alias));
-                        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, new String("ok"));
+
+                        String certificate = RSA.getCertificate(alias);
+
+                        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, certificate);
                         callbackContext.sendPluginResult(pluginResult);
 
                     } catch (Exception e) {
