@@ -1,4 +1,4 @@
-cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module) {
+//cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module) {
 
 
     var RSAPlugin = function() {};
@@ -45,4 +45,4 @@ cordova.define("cordova-plugin-rsa.RSAPlugin", function(require, exports, module
         module.exports = RSAPlugin;
     }
 
-});
+//});
