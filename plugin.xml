@@ -31,4 +31,19 @@
 
     </platform>
 
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="RSAPlugin">
+                <param name="ios-package" value="RSAPlugin"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/RSA/RSA.h" />
+        <source-file src="src/ios/RSA/RSA.m" />
+
+        <header-file src="src/ios/RSAPlugin.h" />
+        <source-file src="src/ios/RSAPlugin.m" />
+
+    </platform>
+
 </plugin>
