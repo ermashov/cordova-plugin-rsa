@@ -107,6 +107,31 @@ public class RSAPlugin extends CordovaPlugin {
 
             return true;
 
+        }else if (action.equals("remove"))
+        {
+
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+
+                        String alias = args.getString(0);
+
+                        String certificate = RSA.deleteKeyPair(alias);
+
+                        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "ok");
+                        callbackContext.sendPluginResult(pluginResult);
+
+                    } catch (Exception e) {
+                        callbackContext.error("token error ex.");
+
+                    }
+
+                }
+            });
+
+            return true;
+
         }
         else if(action.equals("cmsSign"))
         {

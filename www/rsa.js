@@ -34,6 +34,12 @@
         ]);
     };
 
+    RSAPlugin.prototype.remove = function(params, success, fail) {
+        cordova.exec(success, fail, 'RSAPlugin', 'remove', [
+            params.alias
+        ]);
+    };
+
     if (!window.plugins) {
         window.plugins = {};
     }
