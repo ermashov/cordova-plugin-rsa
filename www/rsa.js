@@ -4,8 +4,8 @@
     var RSAPlugin = function() {};
 
 
-    RSAPlugin.prototype.init = function(params, success, fail) {
-        cordova.exec(success, fail, 'RSAPlugin', 'init', [
+    RSAPlugin.prototype.initialize = function(params, success, fail) {
+        cordova.exec(success, fail, 'RSAPlugin', 'initialize', [
             params.alias,
         ]);
     };

@@ -56,7 +56,7 @@ public class RSAPlugin extends CordovaPlugin {
 
         Context context = this.cordova.getActivity().getApplicationContext();
 
-        if (action.equals("init"))
+        if (action.equals("initialize"))
         {
             cordova.getThreadPool().execute(new Runnable() {
                 @Override

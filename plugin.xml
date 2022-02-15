@@ -28,7 +28,6 @@
 
         <source-file src="src/android/RSAPlugin.java" target-dir="src/ru/rsa/plugins/" />
         <source-file src="src/android/RSA.java" target-dir="src/ru/rsa/plugins/" />
-
     </platform>
 
     <platform name="ios">
@@ -38,12 +37,36 @@
             </feature>
         </config-file>
 
-        <header-file src="src/ios/RSA/RSA.h" />
-        <source-file src="src/ios/RSA/RSA.m" />
+        <!--Modifiing target app Info.plist file-->
+        <config-file target="*-Info.plist" parent="ITSAppUsesNonExemptEncryption">
+            <false/>
+        </config-file>
 
-        <header-file src="src/ios/RSAPlugin.h" />
-        <source-file src="src/ios/RSAPlugin.m" />
+        <!--Module entry point-->
+        <source-file src="src/ios/RSAPlugin.swift"/>
 
+        <!--Swift bridging header-->
+        <header-file src="src/ios/RSAPlugin-Bridging-Header.h"/>
+
+        <!--Common swift code-->
+        <source-file src="src/ios/RSA/RSA.swift"/>
+        <source-file src="src/ios/RSA/RSAError.swift"/>
+        <source-file src="src/ios/RSA/CertificateAndKeyPair.swift"/>
+        <source-file src="src/ios/OpenSSLWrapper/OpenSSLWrapper.swift"/>
+        <source-file src="src/ios/OpenSSLWrapper/OpenSSLWrapperError.swift"/>
+        <source-file src="src/ios/Extensions/SecIdentity+Helpers.swift"/>
+        <source-file src="src/ios/Extensions/SecKey+Helpers.swift"/>
+
+        <!--iOS frameworks should be embedded and linked (written twice as source-file and framework)-->
+        <source-file src="src/ios/Frameworks/OpenSSL.xcframework" target-dir="libs" framework="true"/>
+        <source-file src="src/ios/Frameworks/SelfSignedCert.xcframework" target-dir="libs" framework="true"/>
+
+        <!--Frameworks-->
+        <framework src="src/ios/Frameworks/OpenSSL.xcframework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/SelfSignedCert.xcframework" custom="true" embed="true"/>
+
+        <!--Dependencies-->
+        <dependency id="cordova-plugin-add-swift-support" version="^2.0.2"/>
     </platform>
 
 </plugin>
