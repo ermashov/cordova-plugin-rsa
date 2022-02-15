@@ -12,7 +12,8 @@ public class RSAPlugin extends CordovaPlugin {
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 
-        if (action.equals("init")) {
+        if (action.equals("initialize"))
+        {
             cordova.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {

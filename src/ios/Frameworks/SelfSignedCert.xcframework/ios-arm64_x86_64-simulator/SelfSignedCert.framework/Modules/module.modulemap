@@ -1,0 +1,11 @@
+framework module SelfSignedCert {
+  umbrella header "SelfSignedCert.h"
+
+  export *
+  module * { export * }
+}
+
+module SelfSignedCert.Swift {
+    header "SelfSignedCert-Swift.h"
+    requires objc
+}
