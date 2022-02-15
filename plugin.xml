@@ -57,10 +57,6 @@
         <source-file src="src/ios/Extensions/SecIdentity+Helpers.swift"/>
         <source-file src="src/ios/Extensions/SecKey+Helpers.swift"/>
 
-        <!--iOS frameworks should be embedded and linked (written twice as source-file and framework)-->
-        <source-file src="src/ios/Frameworks/OpenSSL.xcframework" target-dir="libs" framework="true"/>
-        <source-file src="src/ios/Frameworks/SelfSignedCert.xcframework" target-dir="libs" framework="true"/>
-
         <!--Frameworks-->
         <framework src="src/ios/Frameworks/OpenSSL.xcframework" custom="true" embed="true"/>
         <framework src="src/ios/Frameworks/SelfSignedCert.xcframework" custom="true" embed="true"/>
