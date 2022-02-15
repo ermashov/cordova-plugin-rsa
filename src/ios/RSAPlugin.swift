@@ -23,6 +23,8 @@ class RSAPlugin: CDVPlugin {
     @objc(initialize:)
     func initialize(command: CDVInvokedUrlCommand) {
         commandDelegate.run { [weak self] in
+            guard let self = self else { return }
+            
             guard let alias = command.arguments[0] as? String else {
                 self.commandDelegate?.send(
                     self.wrongParamsResult(message: "use { alias: 'string' }."),
@@ -32,17 +34,16 @@ class RSAPlugin: CDVPlugin {
             }
             let pluginResult: CDVPluginResult
             switch RSA.shared.getX509CertificatePem(alias: alias) {
-                case .success(let x509PemData):
-                    pluginResult = CDVPluginResult(
-                        status: .ok,
-                        messageAs: x509PemData.base64EncodedString()
-                    )
-                case .failure(let error):
-                    pluginResult = CDVPluginResult(
-                        status: .error,
-                        messageAs: error.localizedDescription
-                    )
-                }
+            case .success(let x509PemData):
+                pluginResult = CDVPluginResult(
+                    status: .ok,
+                    messageAs: x509PemData.base64EncodedString()
+                )
+            case .failure(let error):
+                pluginResult = CDVPluginResult(
+                    status: .error,
+                    messageAs: error.localizedDescription
+                )
             }
             self.commandDelegate?.send(pluginResult, callbackId: command.callbackId)
         }
@@ -51,6 +52,8 @@ class RSAPlugin: CDVPlugin {
     @objc(getCertificate:)
     func getCertificate(command: CDVInvokedUrlCommand) {
         commandDelegate.run { [weak self] in
+            guard let self = self else { return }
+            
             guard let alias = command.arguments[0] as? String else {
                 self.commandDelegate?.send(
                     self.wrongParamsResult(message: "use { alias: 'string' }."),
@@ -60,17 +63,16 @@ class RSAPlugin: CDVPlugin {
             }
             let pluginResult: CDVPluginResult
             switch RSA.shared.getX509CertificatePem(alias: alias) {
-                case .success(let x509PemData):
-                    pluginResult = CDVPluginResult(
-                      status: .ok,
-                      messageAs: x509PemData.base64EncodedString()
-                    )
-                case .failure(let error):
-                    pluginResult = CDVPluginResult(
-                        status: .error,
-                        messageAs: error.localizedDescription
-                    )
-                }
+            case .success(let x509PemData):
+                pluginResult = CDVPluginResult(
+                    status: .ok,
+                    messageAs: x509PemData.base64EncodedString()
+                )
+            case .failure(let error):
+                pluginResult = CDVPluginResult(
+                    status: .error,
+                    messageAs: error.localizedDescription
+                )
             }
             self.commandDelegate?.send(pluginResult, callbackId: command.callbackId)
         }
@@ -79,6 +81,8 @@ class RSAPlugin: CDVPlugin {
     @objc(remove:)
     func remove(command: CDVInvokedUrlCommand) {
         commandDelegate.run { [weak self] in
+            guard let self = self else { return }
+            
             guard let alias = command.arguments[0] as? String else {
                 self.commandDelegate?.send(
                     self.wrongParamsResult(message: "use { alias: 'string' }."),
@@ -88,17 +92,16 @@ class RSAPlugin: CDVPlugin {
             }
             let pluginResult: CDVPluginResult
             switch RSA.shared.deleteCertificateAndKeyPair(alias: alias) {
-                case .success:
-                    pluginResult = CDVPluginResult(
-                        status: .ok,
-                        messageAs: "ok"
-                    )
-                case .failure(let error):
-                    pluginResult = CDVPluginResult(
-                        status: .error,
-                        messageAs: error.localizedDescription
-                    )
-                }
+            case .success:
+                pluginResult = CDVPluginResult(
+                    status: .ok,
+                    messageAs: "ok"
+                )
+            case .failure(let error):
+                pluginResult = CDVPluginResult(
+                    status: .error,
+                    messageAs: error.localizedDescription
+                )
             }
             self.commandDelegate?.send(pluginResult, callbackId: command.callbackId)
         }
@@ -181,11 +184,12 @@ class RSAPlugin: CDVPlugin {
                         messageAs: error.localizedDescription
                     ),
                     callbackId: command.callbackId
+                )
                 return
             }
             
             RSA.shared.cmsDecrypt(
-                x509PemData: certificateAndKeyPair.certificate.data,
+                x509PemData: certificateAndKeyPair.x509CertificateData,
                 privateKeyData: certificateAndKeyPair.privateKeyExternalRepresentation,
                 data: data
             ) { [weak self] result in
@@ -237,11 +241,12 @@ class RSAPlugin: CDVPlugin {
                         messageAs: error.localizedDescription
                     ),
                     callbackId: command.callbackId
+                )
                 return
             }
             
             RSA.shared.cmsSign(
-                x509PemData: certificateAndKeyPair.certificate.data,
+                x509PemData: certificateAndKeyPair.x509CertificateData,
                 privateKeyData: certificateAndKeyPair.privateKeyExternalRepresentation,
                 data: data
             ) { [weak self] result in

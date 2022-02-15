@@ -17,6 +17,8 @@ public class CertificateAndKeyPair {
     public let publicKeyKeychainTag: String
     /// For working with openssl
     public let privateKeyExternalRepresentation: Data
+    /// For working with openssl
+    public let x509CertificateData: Data
     
     public init(
         certificate: SecCertificate,
@@ -34,5 +36,6 @@ public class CertificateAndKeyPair {
         self.alias = alias
         self.publicKeyKeychainTag = publicKeyKeychainTag
         self.privateKeyExternalRepresentation = privateKeyExternalRepresentation
+        self.x509CertificateData = certificate.data
     }
 }
