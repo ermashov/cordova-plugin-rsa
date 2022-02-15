@@ -220,11 +220,11 @@ class RSAPlugin: CDVPlugin {
             
             guard
                 let alias = command.arguments[0] as? String,
-                let base64String = command.arguments[1] as? String,
-                let data = Data(base64Encoded: base64String) else
+                let dataString = command.arguments[1] as? String,
+                let data = dataString.data(using: .utf8) else
             {
                 self.commandDelegate?.send(
-                    self.wrongParamsResult(message: "use { alias: 'string', data: 'encrypted base64' }."),
+                    self.wrongParamsResult(message: "use { alias: 'string', data: 'utf-8 string for signing' }."),
                     callbackId: command.callbackId
                 )
                 return
