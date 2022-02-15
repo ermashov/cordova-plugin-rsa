@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SelfSignedCert
 
 extension SecIdentity {
     @discardableResult

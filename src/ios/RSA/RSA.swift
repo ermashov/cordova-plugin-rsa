@@ -7,6 +7,7 @@
 
 import Foundation
 import OpenSSL
+import SelfSignedCert
 
 private enum Constants {
     static let RsaQueueLabel = "ru.eaasoft.plugins.RSA.SerialQueue"

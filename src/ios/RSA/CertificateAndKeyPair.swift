@@ -7,6 +7,7 @@
 
 import Foundation
 import Security
+import SelfSignedCert
 
 public class CertificateAndKeyPair {
     public let certificate: SecCertificate
