@@ -61,6 +61,18 @@ class RSAPlugin: CDVPlugin {
                 )
                 return
             }
+
+            if !RSA.shared.isCertificateAndKeyPairExists(alias: alias) {
+                self.commandDelegate?.send(
+                    CDVPluginResult(
+                        status: .error,
+                        messageAs: "Certificate and key pair doesn't exist"
+                    ), 
+                    callbackId: command.callbackId
+                )
+                return
+            }
+
             let pluginResult: CDVPluginResult
             switch RSA.shared.getX509CertificatePem(alias: alias) {
             case .success(let x509PemData):
