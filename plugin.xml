@@ -60,6 +60,9 @@
         <!--Frameworks-->
         <framework src="src/ios/Frameworks/OpenSSL.xcframework" custom="true" embed="true"/>
         <framework src="src/ios/Frameworks/SelfSignedCert.xcframework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/IDZSwiftCommonCrypto.xcframework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/SecurityExtensions.xcframework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/SwiftBytes.xcframework" custom="true" embed="true"/>
 
         <!--Dependencies-->
         <dependency id="cordova-plugin-add-swift-support" version="^2.0.2"/>

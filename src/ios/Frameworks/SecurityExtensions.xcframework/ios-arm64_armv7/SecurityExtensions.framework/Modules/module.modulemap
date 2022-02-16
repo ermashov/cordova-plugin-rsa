@@ -1,0 +1,11 @@
+framework module SecurityExtensions {
+  umbrella header "SecurityExtensions.h"
+
+  export *
+  module * { export * }
+}
+
+module SecurityExtensions.Swift {
+    header "SecurityExtensions-Swift.h"
+    requires objc
+}
