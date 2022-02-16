@@ -26,6 +26,7 @@
             </feature>
         </config-file>
 
+        <framework src="src/android/rsa.gradle" custom="true" type="gradleReference" />
         <source-file src="src/android/RSAPlugin.java" target-dir="src/ru/rsa/plugins/" />
         <source-file src="src/android/RSA.java" target-dir="src/ru/rsa/plugins/" />
     </platform>
