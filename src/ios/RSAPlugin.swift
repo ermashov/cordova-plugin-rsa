@@ -9,9 +9,6 @@ import Foundation
 
 @objc(RSAPlugin) 
 class RSAPlugin: CDVPlugin {
-    private lazy var jsonEncoder = JSONEncoder()
-
-    
     // MARK: - Plugin initialization
     override func pluginInitialize() {
         super.pluginInitialize()
@@ -33,11 +30,11 @@ class RSAPlugin: CDVPlugin {
                 return
             }
             let pluginResult: CDVPluginResult
-            switch RSA.shared.getX509CertificatePem(alias: alias) {
-            case .success(let x509PemData):
+            switch RSA.shared.getOrCreateCertificateAndKeyPair(alias: alias) {
+            case .success(let certificateAndKeyPair):
                 pluginResult = CDVPluginResult(
                     status: .ok,
-                    messageAs: x509PemData.base64EncodedString()
+                    messageAs: certificateAndKeyPair.x509CertificateData.base64EncodedString()
                 )
             case .failure(let error):
                 pluginResult = CDVPluginResult(
@@ -62,28 +59,16 @@ class RSAPlugin: CDVPlugin {
                 return
             }
 
-            if !RSA.shared.isCertificateAndKeyPairExists(alias: alias) {
-                self.commandDelegate?.send(
-                    CDVPluginResult(
-                        status: .error,
-                        messageAs: "Certificate and key pair doesn't exist"
-                    ), 
-                    callbackId: command.callbackId
-                )
-                return
-            }
-
             let pluginResult: CDVPluginResult
-            switch RSA.shared.getX509CertificatePem(alias: alias) {
-            case .success(let x509PemData):
+            if let certificateAndKeyPair = RSA.shared.getCertificateAndKeyPairIfExists(alias: alias) {
                 pluginResult = CDVPluginResult(
                     status: .ok,
-                    messageAs: x509PemData.base64EncodedString()
+                    messageAs: certificateAndKeyPair.x509CertificateData.base64EncodedString()
                 )
-            case .failure(let error):
+            } else {
                 pluginResult = CDVPluginResult(
                     status: .error,
-                    messageAs: error.localizedDescription
+                    messageAs: "Certificate and key pair doesn't exist"
                 )
             }
             self.commandDelegate?.send(pluginResult, callbackId: command.callbackId)
@@ -185,16 +170,12 @@ class RSAPlugin: CDVPlugin {
                 return
             }
 
-            let certificateAndKeyPair: CertificateAndKeyPair
-            switch RSA.shared.getCertificateAndKeyPair(alias: alias) {
-            case .success(let cert):
-                certificateAndKeyPair = cert
-            case .failure(let error):
+            guard let certificateAndKeyPair = RSA.shared.getCertificateAndKeyPairIfExists(alias: alias) else {
                 self.commandDelegate?.send(
                     CDVPluginResult(
                         status: .error,
-                        messageAs: error.localizedDescription
-                    ),
+                        messageAs: "Certificate and key pair doesn't exist"
+                    ), 
                     callbackId: command.callbackId
                 )
                 return
@@ -242,16 +223,12 @@ class RSAPlugin: CDVPlugin {
                 return
             }
 
-            let certificateAndKeyPair: CertificateAndKeyPair
-            switch RSA.shared.getCertificateAndKeyPair(alias: alias) {
-            case .success(let cert):
-                certificateAndKeyPair = cert
-            case .failure(let error):
+            guard let certificateAndKeyPair = RSA.shared.getCertificateAndKeyPairIfExists(alias: alias) else {
                 self.commandDelegate?.send(
                     CDVPluginResult(
                         status: .error,
-                        messageAs: error.localizedDescription
-                    ),
+                        messageAs: "Certificate and key pair doesn't exist"
+                    ), 
                     callbackId: command.callbackId
                 )
                 return

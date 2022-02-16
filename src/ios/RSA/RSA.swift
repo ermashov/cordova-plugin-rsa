@@ -15,7 +15,7 @@ private enum Constants {
 }
 
 public class RSA {
-    static let shared = RSA()
+    public static let shared = RSA()
     
     private let serialQueue = DispatchQueue(label: Constants.RsaQueueLabel)
     private let callbackQueue = DispatchQueue.main
@@ -41,6 +41,10 @@ public class RSA {
         }
     }
     private var certificatesAndKeyPairsCache = [String: CertificateAndKeyPair]()
+
+
+    // MARK: - Public
+    public init() { }
     
     
     // MARK: - Private
@@ -71,7 +75,7 @@ public class RSA {
     
     private func createCertificateAndKeyPair(alias: String) throws -> CertificateAndKeyPair {
         let validFrom = Date()
-        let validTo = validFrom.addingTimeInterval(100*365*24*3600) // 100 years
+        let validTo = validFrom.addingTimeInterval(100 * 365 * 24 * 3600) // 100 years
         guard
             let identity = SecIdentity.create(
                 ofSize: 2048,
@@ -101,16 +105,20 @@ public class RSA {
     
     
     // MARK: - Public
-    public func isCertificateAndKeyPairExists(alias: String) -> Bool {
-        return getSavedCertificateAndKeyPair(alias: alias) != nil
+    public func getCertificateAndKeyPairIfExists(alias: String) -> CertificateAndKeyPair? {
+        if let cachedCertificateAndKeyPair = certificatesAndKeyPairsCache[alias] {
+            return cachedCertificateAndKeyPair
+        } else if let savedCertificateAndKeyPair = getSavedCertificateAndKeyPair(alias: alias) {
+            return savedCertificateAndKeyPair 
+        } else {
+            return nil
+        }
     }
     
-    public func getCertificateAndKeyPair(alias: String) -> Result<CertificateAndKeyPair, RSAError> {
+    public func getOrCreateCertificateAndKeyPair(alias: String) -> Result<CertificateAndKeyPair, RSAError> {
         let certificateAndKeyPair: CertificateAndKeyPair
-        if let cachedCertificateAndKeyPair = certificatesAndKeyPairsCache[alias] {
-            certificateAndKeyPair = cachedCertificateAndKeyPair
-        } else if let savedCertificateAndKeyPair = getSavedCertificateAndKeyPair(alias: alias) {
-            certificateAndKeyPair = savedCertificateAndKeyPair 
+        if let existentCertificateAndKeyPair = getCertificateAndKeyPairIfExists(alias: alias) {
+            certificateAndKeyPair = existentCertificateAndKeyPair
         } else {
             do {
                 certificateAndKeyPair = try createCertificateAndKeyPair(alias: alias)
@@ -126,15 +134,6 @@ public class RSA {
         // Update loaded certificates and keypairs cache
         self.certificatesAndKeyPairsCache[alias] = certificateAndKeyPair
         return .success(certificateAndKeyPair)
-    }
-    
-    public func getX509CertificatePem(alias: String) -> Result<Data, RSAError> {
-        switch getCertificateAndKeyPair(alias: alias) {
-        case .success(let certificateAndKeyPair):
-            return .success(certificateAndKeyPair.certificate.data)
-        case .failure(let error):
-            return .failure(error)
-        }
     }
     
     public func deleteCertificateAndKeyPair(alias: String) -> Result<Void, RSAError> {
