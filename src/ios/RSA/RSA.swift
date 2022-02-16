@@ -137,15 +137,16 @@ public class RSA {
     }
     
     public func deleteCertificateAndKeyPair(alias: String) -> Result<Void, RSAError> {
-        if let savedCertificateAndKeyPair = getSavedCertificateAndKeyPair(alias: alias) {
-            if savedCertificateAndKeyPair.secIdentity.deleteFromKeychain() {
-                return .success(())
-            } else {
-                return .failure(RSAError.keyPairGenerationFailed)
-            }
+        // Clear cache for alias anyway
+        certificatesAndKeyPairsCache.removeValue(forKey: alias)
+        if
+            let savedCertificateAndKeyPair = getSavedCertificateAndKeyPair(alias: alias),
+            savedCertificateAndKeyPair.secIdentity.deleteFromKeychain()
+        {
+            return .success(())
+        } else {
+            return .failure(RSAError.keyPairDeletionFailed)
         }
-        // Nothing to delete
-        return .success(())
     }
     
     public func cmsEncrypt(
