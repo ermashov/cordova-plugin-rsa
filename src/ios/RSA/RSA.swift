@@ -143,6 +143,10 @@ public class RSA {
             let savedCertificateAndKeyPair = getSavedCertificateAndKeyPair(alias: alias),
             savedCertificateAndKeyPair.secIdentity.deleteFromKeychain()
         {
+            // Update alias-to-keychainTag map after deletion
+            var updatedMap = keyAliasToTagMap
+            updatedMap.removeValue(forKey: alias)
+            self.keyAliasToTagMap = updatedMap
             return .success(())
         } else {
             return .failure(RSAError.keyPairDeletionFailed)
