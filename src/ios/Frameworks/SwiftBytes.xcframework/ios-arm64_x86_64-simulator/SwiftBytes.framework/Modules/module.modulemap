@@ -1,0 +1,4 @@
+framework module SwiftBytes {
+  header "SwiftBytes-Swift.h"
+  requires objc
+}
