@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OpenSSL
 import SelfSignedCert
 
 private enum Constants {

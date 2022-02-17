@@ -58,7 +58,7 @@
         <source-file src="src/ios/Extensions/SecKey+Helpers.swift"/>
 
         <!--Frameworks-->
-        <framework src="src/ios/Frameworks/OpenSSL.xcframework" custom="true" embed="true"/>
+        <framework src="src/ios/Frameworks/openssl.framework" custom="true" embed="true"/>
         <framework src="src/ios/Frameworks/SelfSignedCert.xcframework" custom="true" embed="true"/>
         <framework src="src/ios/Frameworks/IDZSwiftCommonCrypto.xcframework" custom="true" embed="true"/>
         <framework src="src/ios/Frameworks/SecurityExtensions.xcframework" custom="true" embed="true"/>

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OpenSSL
 
 public enum OpenSSLWrapper {
     // MARK: - Public
